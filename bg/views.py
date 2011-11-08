@@ -11,3 +11,16 @@ def main(request):
 	resp = HttpResponse()
 	resp.write("This is the main page")
 	return resp
+
+
+def getAverageRgb(pixels):
+	if not pixels:
+		return (0,0,0)
+	
+	pixCount =  len(pixels)
+
+	finalR = sum(p[0] for p in pixels)/pixCount
+	finalG = sum(p[1] for p in pixels)/pixCount
+	finalB = sum(p[2] for p in pixels)/pixCount
+
+	return (finalR, finalG, finalB)
