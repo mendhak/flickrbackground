@@ -49,3 +49,19 @@ class SimpleTest(TestCase):
 		self.assertEqual(averageRgb[1],0)
 		self.assertEqual(averageRgb[2],0)
 
+	def test_rgb_gets_hexadecimal(self):
+		"""
+		Passes an RGB value, gets a hexadecimal for CSS back
+		"""
+		hex = views.getHexadecimal((131,44,17))
+		self.assertEqual(hex, "#832C11")
+
+	def test_NullRgb_ReturnsBlack(self):
+		"""
+		Passes a null RGB in, gets black back
+		"""
+		hex = views.getHexadecimal(None)
+		self.assertEqual("#000000", hex)
+		
+
+
