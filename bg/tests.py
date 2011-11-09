@@ -10,18 +10,13 @@ from bg import views
 
 
 class SimpleTest(TestCase):
-	def test_basic_addition(self):
-		"""
-		Tests that 1 + 1 always equals 2.
-		"""
-		print "test_basic_addition"
-		self.assertEqual(1 + 1, 2)
+
 
 	def test_rgbTuples_GetsAverage(self):
 		"""
 		Passes an array of rgb values, gets an average back
 		"""
-		print "rgbTuples_GetsAverage"
+		print "test_rgbTuples_GetsAverage"
 		averageRgb = views.getAverageRgb([(50,50,50), (0,0,0), ])
 		self.assertEqual(averageRgb[0], 25)
 		self.assertEqual(averageRgb[1], 25)
@@ -33,7 +28,7 @@ class SimpleTest(TestCase):
 		The tuples' average is not a whole number
 		Function should return the lower integer
 		"""
-		print "rgbTuples_OddResult_GetsLowerInteger"
+		print "test_rgbTuples_OddResult_GetsLowerInteger"
 		averageRgb = views.getAverageRgb([(50,50,50), (0,0,0), (1,33,17), (88,2,113), (0,2,2), (0,2,2), ])
 		self.assertEqual(averageRgb[0], 23)
 		self.assertEqual(averageRgb[1], 14)
@@ -43,7 +38,7 @@ class SimpleTest(TestCase):
 		"""
 		Passes in a None to the getAverageRgb method, gets black back
 		"""
-		print "rgbTuples_Null_ReturnsBlack"
+		print "test_rgbTuples_Null_ReturnsBlack"
 		averageRgb = views.getAverageRgb(None)
 		self.assertEqual(averageRgb[0],0)
 		self.assertEqual(averageRgb[1],0)
@@ -53,6 +48,7 @@ class SimpleTest(TestCase):
 		"""
 		Passes an RGB value, gets a hexadecimal for CSS back
 		"""
+		print "test_rgb_gets_hexadecimal"
 		hex = views.getHexadecimal((131,44,17))
 		self.assertEqual(hex, "#832C11")
 
@@ -60,8 +56,48 @@ class SimpleTest(TestCase):
 		"""
 		Passes a null RGB in, gets black back
 		"""
+		print "test_NullRgb_ReturnsBlack"
 		hex = views.getHexadecimal(None)
 		self.assertEqual("#000000", hex)
+
+	def test_CssColorName_GetsHexValue(self):
+		"""
+		Pass in a color name, get a hex value back
+		"""
+		print "test_CssColorName_GetsHexValue"
+		hex = views.getColorByName("red")
+		self.assertEqual("#ff0000", hex)
+
+	def test_AnyCaseName_GetsHexValue(self):
+		"""
+		Pass in a color name in a jumbled case, returns hex value
+		"""
+		print "test_AnyCaseName_GetsHexValue"
+		hex = views.getColorByName("DArkMaGeNta")
+		self.assertEqual("#8b008b", hex)
+
+	def test_MultipleWordsColorName_GetsHexValue(self):
+		"""
+		Passes in a multi-word color, with spaces, gets a hex value back
+		"""
+		print "test_MultipleWordsColorName_GetsHexValue"
+		hex = views.getColorByName("Light Slate Gray")
+		self.assertEqual("#778899", hex)
 		
+	def test_InvalidColorName_GetsBlackHex(self):
+		"""
+		Passes in a nonsense color name, gets black as a default back
+		"""
+		print "test_InvalidColorName_GetsBlackHex"
+		hex = views.getColorByName("The Colour of Magic")
+		self.assertEqual("#000000", hex)
+
+	def test_NullColorName_GetsBlackHex(self):
+		"""
+		Passes in a null color name, gets black back
+		"""
+		print "test_NullColorName_GetsBlackHex"
+		hex = views.getColorByName(None)
+		self.assertEqual("#000000", hex)
 
 
