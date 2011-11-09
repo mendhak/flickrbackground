@@ -42,7 +42,7 @@ def getColorByName(colorName):
 	colorName = colorName.lower()
 	colorName = colorName.replace(' ', '')
 
-	if(colorName in webcolors.css3_names_to_hex):
+	if colorName in webcolors.css3_names_to_hex:
 		hexValue = webcolors.css3_names_to_hex[colorName]
 
 	return hexValue
