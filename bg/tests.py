@@ -100,4 +100,37 @@ class SimpleTest(TestCase):
 		hex = views.getColorByName(None)
 		self.assertEqual("#000000", hex)
 
+	def test_HexString_IsAValidHexString(self):
+		"""
+		Passes a hex string without the #, returns a boolean true
+		"""
+		print "test_HexString_IsAValidHexString"
+		isHex = views.isHexString("FFAC79")
+		self.assertTrue(isHex)
+
+	def test_AnyCaseHexString_IsAValidHexString(self):
+		"""
+		Passes a hex string without the # in jumble case, returns a boolean true
+		"""
+		print "test_AnyCaseHexString_IsAValidHexString"
+		isHex = views.isHexString("a3CeDd")
+		self.assertTrue(isHex)
+
+	def test_NonHexString_IsNotAValidHexString(self):
+		"""
+		Passes nonsense word, returns a boolean false
+		"""
+		print "test_NonHexString_IsNotAValidHexString"
+		isHex = views.isHexString("DDXXyio2k;")
+		self.assertFalse(isHex)
+
+	def test_NullString_IsNotAValidHexString(self):
+		"""
+		Passes a null string in, gets a boolean false
+		"""
+		print "test_NullString_IsNotAValidHexString"
+		isHex = views.isHexString(None)
+		self.assertFalse(isHex)
+
+
 

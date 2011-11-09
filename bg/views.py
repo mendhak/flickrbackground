@@ -1,4 +1,5 @@
 # Create your views here.
+import re
 from django.http import HttpResponse
 import webcolors
 
@@ -46,3 +47,12 @@ def getColorByName(colorName):
 		hexValue = webcolors.css3_names_to_hex[colorName]
 
 	return hexValue
+
+
+def isHexString(inputString):
+
+	if not inputString:
+		return False
+
+	hexRe = re.compile("[a-fA-F0-9]{6}")
+	return hexRe.match(inputString)
