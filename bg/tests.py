@@ -6,6 +6,7 @@ Replace this with more appropriate tests for your application.
 """
 
 from django.test import TestCase
+from django.test.client import Client
 from bg import views
 
 
@@ -49,7 +50,7 @@ class SimpleTest(TestCase):
 		Passes an RGB value, gets a hexadecimal for CSS back
 		"""
 		print "test_rgb_gets_hexadecimal"
-		hex = views.getHexadecimal((131,44,17))
+		hex = views.getHexadecimalFromRgb((131,44,17))
 		self.assertEqual(hex, "#832C11")
 
 	def test_NullRgb_ReturnsBlack(self):
@@ -57,7 +58,7 @@ class SimpleTest(TestCase):
 		Passes a null RGB in, gets black back
 		"""
 		print "test_NullRgb_ReturnsBlack"
-		hex = views.getHexadecimal(None)
+		hex = views.getHexadecimalFromRgb(None)
 		self.assertEqual("#000000", hex)
 
 	def test_CssColorName_GetsHexValue(self):
@@ -131,6 +132,7 @@ class SimpleTest(TestCase):
 		print "test_NullString_IsNotAValidHexString"
 		isHex = views.isHexString(None)
 		self.assertFalse(isHex)
+
 
 
 

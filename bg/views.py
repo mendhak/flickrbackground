@@ -25,10 +25,10 @@ def getAverageRgb(pixels):
 	finalG = sum(p[1] for p in pixels)/pixCount
 	finalB = sum(p[2] for p in pixels)/pixCount
 
-	return (finalR, finalG, finalB)
+	return finalR, finalG, finalB
 
 
-def getHexadecimal(rgb):
+def getHexadecimalFromRgb(rgb):
 	if not rgb:
 		return "#000000"
 	return "#%02X%02X%02X" % (rgb[0],rgb[1],rgb[2])
