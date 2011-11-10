@@ -149,6 +149,8 @@ class SimpleTest(TestCase):
 		"""
 		Given a URL request, returns the referrer
 		"""
+		print "test_Url_GetsReferrer"
+
 		r = HttpRequest()
 		r.method == "GET"
 		r.path == '/magic'
@@ -158,6 +160,11 @@ class SimpleTest(TestCase):
 		self.assertEqual(referrer, 'test referrer')
 
 	def test_UrlWithoutReferrer_ReturnsNone(self):
+		"""
+		If a request with no referrer is passed in, None is returned
+		"""
+		print "test_UrlWithoutReferrer_ReturnsNone"
+
 		r = HttpRequest()
 		r.method == "GET"
 		r.path == '/magic'
@@ -166,4 +173,33 @@ class SimpleTest(TestCase):
 		self.assertEqual(referrer, None)
 		
 
+	def test_FlickrURL_ReturnsPhotoID(self):
+		"""
+		Given a flickr photo page URL, return the Photo ID
+		"""
+		print "test_FlickrURL_ReturnsPhotoID"
+		photoId = views.getFlickrPhotoId("http://flickr.com/photos/mendhak/12345")
+		self.assertEqual("12345", photoId)
 
+	def test_FlickrUrlExtended_ReturnsPhotoID(self):
+		"""
+		Given a long Flickr URL, return the PHOTO ID
+		"""
+		print "test_FlickrUrlExtended_ReturnsPhotoID"
+		photoId = views.getFlickrPhotoId("http://www.flickr.com/photos/mendhak/123456/in/photostream/lightbox/2452")
+		self.assertEqual("123456", photoId)
+
+	def test_FlickrInvalidUrl_ReturnsNone(self):
+		"""
+		Given an invalid flickr URL, returns None
+		"""
+		print "test_FlickrInvalidUrl_ReturnsNone"
+		photoId = views.getFlickrPhotoId("http://www.flickr.com/photos/mendhak")
+		self.assertEqual(photoId, None)
+
+	def test_None_ReturnsNone(self):
+		"""
+		For a None 'flickr url', returns None
+		"""
+		photoId = views.getFlickrPhotoId(None)
+		self.assertEqual(photoId, None)

@@ -63,3 +63,15 @@ def getReferrerFromRequest(req):
 		return req.META["HTTP_REFERER"]
 
 	return None
+
+
+def getFlickrPhotoId(flickrUrl):
+
+	if flickrUrl:
+		r = re.compile("/photos/[^/]+/(?P<photoid>[0-9]+)")
+		if r.search(flickrUrl):
+			return r.search(flickrUrl).group("photoid")
+
+
+	return None
+	
