@@ -4,6 +4,7 @@ when you run "manage.py test".
 
 Replace this with more appropriate tests for your application.
 """
+from django.http import HttpRequest
 
 from django.test import TestCase
 from django.test.client import Client
@@ -133,6 +134,36 @@ class SimpleTest(TestCase):
 		isHex = views.isHexString(None)
 		self.assertFalse(isHex)
 
+#
+# To process /magic URLs:
+#Request comes in, read the referrer
+#example: http://flickr.com/photos/username/234124/in/photostream
+#Get the '234124' out
+#Call flickr API, get photo details
+#Get medium size URL
+#Request it
+#Use the GetAverageRGB method
 
+
+	def test_Url_GetsReferrer(self):
+		"""
+		Given a URL request, returns the referrer
+		"""
+		r = HttpRequest()
+		r.method == "GET"
+		r.path == '/magic'
+		r.META["HTTP_REFERER"] = 'test referrer'
+
+		referrer = views.getReferrerFromRequest(r)
+		self.assertEqual(referrer, 'test referrer')
+
+	def test_UrlWithoutReferrer_ReturnsNone(self):
+		r = HttpRequest()
+		r.method == "GET"
+		r.path == '/magic'
+
+		referrer = views.getReferrerFromRequest(r)
+		self.assertEqual(referrer, None)
+		
 
 

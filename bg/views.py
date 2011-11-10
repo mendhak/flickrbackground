@@ -56,3 +56,10 @@ def isHexString(inputString):
 
 	hexRe = re.compile("[a-fA-F0-9]{6}")
 	return hexRe.match(inputString)
+
+
+def getReferrerFromRequest(req):
+	if "HTTP_REFERER" in req.META:
+		return req.META["HTTP_REFERER"]
+
+	return None
