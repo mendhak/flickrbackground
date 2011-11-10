@@ -1,7 +1,10 @@
 # Create your views here.
 import re
+import urllib
+from xml.dom import minidom
 from django.http import HttpResponse
 import webcolors
+from bg.models import FlickrPhoto
 
 def showcolor(request, color):
 	resp = HttpResponse()
@@ -65,13 +68,3 @@ def getReferrerFromRequest(req):
 	return None
 
 
-def getFlickrPhotoId(flickrUrl):
-
-	if flickrUrl:
-		r = re.compile("/photos/[^/]+/(?P<photoid>[0-9]+)")
-		if r.search(flickrUrl):
-			return r.search(flickrUrl).group("photoid")
-
-
-	return None
-	

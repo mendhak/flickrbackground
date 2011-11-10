@@ -8,7 +8,7 @@ from django.http import HttpRequest
 
 from django.test import TestCase
 from django.test.client import Client
-from bg import views
+from bg import views, flickrapi
 
 
 class SimpleTest(TestCase):
@@ -122,7 +122,7 @@ class SimpleTest(TestCase):
 
 #
 # To process /magic URLs:
-#Request comes in, read the referrer
+
 #example: http://flickr.com/photos/username/234124/in/photostream
 #Get the '234124' out
 #Call flickr API, get photo details
@@ -161,26 +161,32 @@ class SimpleTest(TestCase):
 		"""
 		Given a flickr photo page URL, return the Photo ID
 		"""
-		photoId = views.getFlickrPhotoId("http://flickr.com/photos/mendhak/12345")
+		photoId = flickrapi.getPhotoIdFromUrl("http://flickr.com/photos/mendhak/12345")
 		self.assertEqual("12345", photoId)
 
 	def getFlickrPhotoId_FlickrUrlExtended_ReturnsPhotoID(self):
 		"""
 		Given a long Flickr URL, return the PHOTO ID
 		"""
-		photoId = views.getFlickrPhotoId("http://www.flickr.com/photos/mendhak/123456/in/photostream/lightbox/2452")
+		photoId = flickrapi.getPhotoIdFromUrl("http://www.flickr.com/photos/mendhak/123456/in/photostream/lightbox/2452")
 		self.assertEqual("123456", photoId)
 
 	def getFlickrPhotoId_FlickrInvalidUrl_ReturnsNone(self):
 		"""
 		Given an invalid flickr URL, returns None
 		"""
-		photoId = views.getFlickrPhotoId("http://www.flickr.com/photos/mendhak")
+		photoId = flickrapi.getPhotoIdFromUrl("http://www.flickr.com/photos/mendhak")
 		self.assertEqual(photoId, None)
 
 	def getFlickrPhotoId_None_ReturnsNone(self):
 		"""
 		For a None 'flickr url', returns None
 		"""
-		photoId = views.getFlickrPhotoId(None)
+		photoId = flickrapi.getPhotoIdFromUrl(None)
 		self.assertEqual(photoId, None)
+
+	def getPhotoInfo(self):
+		flickrPhoto = flickrapi.getPhotoInfo("a39dfdf51784c76fa3234f88bec38b0e", "6245582355")
+		print flickrPhoto.farm
+		self.assertEqual(flickrPhoto.farm, "7")
+		
