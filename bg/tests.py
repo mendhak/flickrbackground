@@ -9,6 +9,7 @@ from django.http import HttpRequest
 from django.test import TestCase
 from django.test.client import Client
 from bg import views, flickrapi
+from bg.flickrapi import FlickrPhoto
 
 
 class SimpleTest(TestCase):
@@ -120,16 +121,6 @@ class SimpleTest(TestCase):
 		isHex = views.isHexString(None)
 		self.assertFalse(isHex)
 
-#
-# To process /magic URLs:
-
-#example: http://flickr.com/photos/username/234124/in/photostream
-#Get the '234124' out
-#Call flickr API, get photo details
-#Get medium size URL
-#Request it
-#Use the GetAverageRGB method
-
 
 	def test_getReferrerFromRequest_Url_GetsReferrer(self):
 		"""
@@ -185,8 +176,15 @@ class SimpleTest(TestCase):
 		photoId = flickrapi.getPhotoIdFromUrl(None)
 		self.assertEqual(photoId, None)
 
-	def test_getPhotoInfo(self):
-		flickrPhoto = flickrapi.getPhotoInfo("a39dfdf51784c76fa3234f88bec38b0e", "6245582355")
+	def test_getImageUrl_FlickrPhoto_FlickrImageUrl(self):
+		photo = FlickrPhoto()
+		photo.farm = "7"
+		photo.id  = "6245582355"
+		photo.secret = "8a62f2a6e1"
+		photo.server = "6043"
 
-		self.assertEqual(flickrPhoto.farm, "7")
+		flickrPhotoUrl = flickrapi.getImageUrl(photo, "z" )
+		self.assertEqual(flickrPhotoUrl, "http://farm7.static.flickr.com/6043/6245582355_8a62f2a6e1_z.jpg")
+
+	
 		

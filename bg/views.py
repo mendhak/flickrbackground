@@ -4,7 +4,7 @@ import urllib
 from xml.dom import minidom
 from django.http import HttpResponse
 import webcolors
-from bg.models import FlickrPhoto
+
 
 def showcolor(request, color):
 	resp = HttpResponse()
