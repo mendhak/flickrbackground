@@ -31,7 +31,9 @@ def showcolor(request, color, photoid):
 
 	hexColor = getColor(color, photoUrl)
 
-	return render_to_response('display.html', {'hexColor': hexColor, 'photoUrl': photoUrl})
+	returnUrl = "http://www.flickr.com/photo.gne?id=" + flickrPhotoId
+
+	return render_to_response('display.html', {'hexColor': hexColor, 'photoUrl': photoUrl, 'returnUrl': returnUrl})
 
 
 def main(request):

@@ -1,10 +1,30 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-		"http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<title></title>
+    <style type="text/css">
+
+	    html, body, #wrapper {
+		   height:100%;
+		   width: 100%;
+		   margin: 0;
+		   padding: 0;
+		   border: 0;
+		}
+		#wrapper td {
+		   vertical-align: middle;
+		   text-align: center;
+		}
+
+    </style>
 </head>
-<body>
-{{ photoUrl }}, {{ hexColor }}
+<body style="background-color:{{ hexColor }};">
+
+   <table id="wrapper">
+      <tr>
+         <td><a title="Return to the Flickr photo page" href="{{ returnUrl }}"><img title="Return to the Flickr photo page" src="{{ photoUrl }}" style="border-width:0px;" width="" /></a></td>
+      </tr>
+   </table>
+
+
 </body>
 </html>
