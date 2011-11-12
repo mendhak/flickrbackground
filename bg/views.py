@@ -4,11 +4,11 @@ import urllib
 from xml.dom import minidom
 from django.http import HttpResponse
 import webcolors
+from bg import flickrapi
 
 
-def showcolor(request, color):
+def showcolor(request, color, photoid, size):
 	resp = HttpResponse()
-	resp.write(color)
 	return resp
 
 
@@ -16,6 +16,8 @@ def main(request):
 	resp = HttpResponse()
 	resp.write("This is the main page")
 	return resp
+
+
 
 
 def getAverageRgb(pixels):
@@ -66,5 +68,15 @@ def getReferrerFromRequest(req):
 		return req.META["HTTP_REFERER"]
 
 	return None
+
+
+def getPhotoId(photoId, request):
+	if photoId:
+		return photoId
+
+	if request:
+		referrer = getReferrerFromRequest(request)
+		photoId = flickrapi.getPhotoIdFromUrl(referrer)
+		return photoId
 
 

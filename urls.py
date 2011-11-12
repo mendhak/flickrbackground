@@ -6,7 +6,7 @@ from django.conf.urls.defaults import patterns, include, url
 
 urlpatterns = patterns('',
                        url(r'^$', 'bg.views.main'),
-	                   url(r'^(?i)(?P<color>.+)', 'bg.views.showcolor'),
+                       url(r'^(?i)(?P<color>[^/]+)/?(?P<photoid>[0-9]+)?/?(?P<size>[a-z]+)?', 'bg.views.showcolor'),
     # Examples:
     # url(r'^$', 'flickrbackground.views.home', name='home'),
     # url(r'^flickrbackground/', include('flickrbackground.foo.urls')),

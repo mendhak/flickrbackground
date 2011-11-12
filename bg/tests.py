@@ -146,7 +146,7 @@ class SimpleTest(TestCase):
 
 		referrer = views.getReferrerFromRequest(r)
 		self.assertEqual(referrer, None)
-		
+
 
 	def test_getFlickrPhotoId_FlickrURL_ReturnsPhotoID(self):
 		"""
@@ -186,5 +186,26 @@ class SimpleTest(TestCase):
 		flickrPhotoUrl = flickrapi.getImageUrl(photo, "z" )
 		self.assertEqual(flickrPhotoUrl, "http://farm7.static.flickr.com/6043/6245582355_8a62f2a6e1_z.jpg")
 
-	
+
+	def test_getPhotoId_PhotoId_PhotoId(self):
+		photoid = views.getPhotoId("12345",None)
+		self.assertEqual("12345", photoid)
+
+	def test_getPhotoId_None_None(self):
+		photoId = views.getPhotoId(None,None)
+		self.assertEqual(photoId, None)
+
+	def test_getPhotoId_RequestReferrer_PhotoId(self):
+		req = HttpRequest()
+		req.META["HTTP_REFERER"] = 'http://www.flickr.com/photos/mendhak/12345/in/lightbox'
+
+		photoId = views.getPhotoId(None, req)
+		self.assertEqual(photoId, "12345")
+
+	def test_getPhotoId_PhotoIdAndReferrer_PhotoIdPreferred(self):
+		req = HttpRequest()
+		req.META["HTTP_REFERER"] = 'http://www.flickr.com/photos/mendhak/12345/in/lightbox'
+
+		photoId = views.getPhotoId("67890", req)
+		self.assertEqual(photoId, "67890")
 		
