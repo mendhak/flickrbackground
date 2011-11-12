@@ -102,6 +102,26 @@ def getPhotoInfo(apiKey, photoId):
 	return photo
 
 
+def getLargestSizeUrl(apiKey, photoId):
+	"""
+	Gets the largest available photo size for a photo, but not the original
+	"""
+	largestUrl = None
+	photoSizesUrl = "http://api.flickr.com/services/rest/?method=flickr.photos.getSizes&api_key={0}&photo_id={1}"\
+					.format(apiKey, photoId)
+
+	dom = minidom.parse(urllib.urlopen(photoSizesUrl))
+
+	sizeNodes = dom.getElementsByTagName("size")
+
+	for sizeNode in sizeNodes:
+		if not sizeNode.getAttribute("label") == "Original":
+			largestUrl = sizeNode.getAttribute("source")
+
+	return largestUrl
+
+
+
 class FlickrPhoto:
 	id = ''
 	server = ''

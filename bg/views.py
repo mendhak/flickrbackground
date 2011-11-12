@@ -9,7 +9,7 @@ from bg import flickrapi
 
 def showcolor(request, color, photoid):
 	# Get photo id
-	# Request photo info
+	# Get largest photo size
 	# Get color(color, photoid)
 	#   If magic, then download, average RGB
 	#   If hex, get hex
@@ -20,6 +20,9 @@ def showcolor(request, color, photoid):
 
 	if not flickrPhotoId:
 		raise Http404
+
+	photoUrl = flickrapi.getLargestSizeUrl("", flickrPhotoId)
+
 	return resp
 
 
