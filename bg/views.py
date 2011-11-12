@@ -2,7 +2,7 @@
 import re
 import urllib
 from xml.dom import minidom
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 import webcolors
 from bg import flickrapi
 
@@ -16,6 +16,10 @@ def showcolor(request, color, photoid):
 	#   Else get color by name
 	#
 	resp = HttpResponse()
+	flickrPhotoId = getPhotoId(photoid, request)
+
+	if not flickrPhotoId:
+		raise Http404
 	return resp
 
 

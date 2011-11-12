@@ -208,4 +208,8 @@ class SimpleTest(TestCase):
 
 		photoId = views.getPhotoId("67890", req)
 		self.assertEqual(photoId, "67890")
-		
+
+	def test_Client_NoPhotoIdAvailable_404(self):
+		c = Client()
+		resp = c.get('/black')
+		self.assertEqual(resp.status_code, 404)
