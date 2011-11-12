@@ -1,4 +1,8 @@
 # Create your views here.
+
+#sudo apt-get install python-imaging
+#sudo pip install webcolors
+
 import Image
 import StringIO
 import re
