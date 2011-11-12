@@ -1,16 +1,19 @@
 # Create your views here.
+import Image
+import StringIO
 import re
 import urllib
 from xml.dom import minidom
 from django.http import HttpResponse, Http404
+from django.shortcuts import render_to_response
 import webcolors
 from bg import flickrapi
 
 
 def showcolor(request, color, photoid):
 	# Get photo id
-	# Get largest photo size
-	# Get color(color, photoid)
+	# Get largest photo size URL
+	# Get color(color, photoUrl)
 	#   If magic, then download, average RGB
 	#   If hex, get hex
 	#   Else get color by name
@@ -21,9 +24,14 @@ def showcolor(request, color, photoid):
 	if not flickrPhotoId:
 		raise Http404
 
-	photoUrl = flickrapi.getLargestSizeUrl("", flickrPhotoId)
+	photoUrl = flickrapi.getLargestSizeUrl("b4fe2a004c947c42b2be8f2796796105", flickrPhotoId)
 
-	return resp
+	if not photoUrl:
+		raise Http404
+
+	hexColor = getColor(color, photoUrl)
+
+	return render_to_response('display.html', {'hexColor': hexColor, 'photoUrl': photoUrl})
 
 
 def main(request):
@@ -50,7 +58,7 @@ def getAverageRgb(pixels):
 def getHexadecimalFromRgb(rgb):
 	if not rgb:
 		return "#000000"
-	return "#%02X%02X%02X" % (rgb[0],rgb[1],rgb[2])
+	return ("#%02X%02X%02X" % (rgb[0],rgb[1],rgb[2])).lower()
 
 
 def getColorByName(colorName):
@@ -93,4 +101,26 @@ def getPhotoId(photoId, request):
 		photoId = flickrapi.getPhotoIdFromUrl(referrer)
 		return photoId
 
+
+def getColor(colorString, photoUrl):
+
+	if not colorString:
+		return "#000000"
+
+	if colorString.lower() == "magic":
+		rgbArray = getRemoteImageRgb(photoUrl)
+		averageRgb = getAverageRgb(rgbArray)
+		return getHexadecimalFromRgb(averageRgb)
+
+	if isHexString(colorString):
+		return "#" + colorString.lower()
+	
+	return getColorByName(colorString)
+
+def getRemoteImageRgb(photoUrl):
+	remoteimg = urllib.urlopen(photoUrl)
+	imgs = StringIO.StringIO(remoteimg.read())
+	img = Image.open(imgs)
+
+	return list(img.getdata())
 

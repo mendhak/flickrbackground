@@ -4,6 +4,7 @@ when you run "manage.py test".
 
 Replace this with more appropriate tests for your application.
 """
+from unittest.case import skipIf
 from django.http import HttpRequest
 
 from django.test import TestCase
@@ -14,6 +15,7 @@ from bg.flickrapi import FlickrPhoto
 
 class SimpleTest(TestCase):
 
+	SKIP_HTTPREQUEST_TESTS = True
 
 	def test_getAverageRgb_rgbTuples_GetsAverage(self):
 		"""
@@ -49,7 +51,7 @@ class SimpleTest(TestCase):
 		Passes an RGB value, gets a hexadecimal for CSS back
 		"""
 		hex = views.getHexadecimalFromRgb((131,44,17))
-		self.assertEqual(hex, "#832C11")
+		self.assertEqual(hex, "#832c11")
 
 	def test_NullRgb_ReturnsBlack(self):
 		"""
@@ -213,3 +215,48 @@ class SimpleTest(TestCase):
 		c = Client()
 		resp = c.get('/black')
 		self.assertEqual(resp.status_code, 404)
+
+	def test_getColor_Name_Hexadecimal(self):
+		hex = views.getColor("Red", None)
+		self.assertEqual(hex, "#ff0000")
+
+	def test_getColor_Hex_Hexadecimal(self):
+		hex = views.getColor("Ff00a7", None)
+		self.assertEqual(hex, "#ff00a7")
+
+	def test_getColor_None_Black(self):
+		hex = views.getColor(None, None)
+		self.assertEqual(hex, "#000000")
+
+	@skipIf(SKIP_HTTPREQUEST_TESTS, "Skipping method because it hits an external resource, use sparingly")
+	def test_getColor_MagicWithUrl_AverageUrl(self):
+		hex = views.getColor("magic", "http://farm7.static.flickr.com/6099/6304815985_ca9ffc2873_b.jpg")
+		self.assertEqual(hex, "#5081cd")
+
+	@skipIf(SKIP_HTTPREQUEST_TESTS, "Skipping method because it hits an external resource, use sparingly")
+	def test_getColor_MagicCaseInsensitive_AverageUrl(self):
+		hex = views.getColor("maGiC", "http://farm7.static.flickr.com/6099/6304815985_ca9ffc2873_b.jpg")
+		self.assertEqual(hex, "#5081cd")
+
+	@skipIf(SKIP_HTTPREQUEST_TESTS, "Skipping method because it hits an external resource, use sparingly")
+	def test_ClientUrl_ColorPhotoId_TemplateInvoked(self):
+		c = Client()
+		resp = c.get('/black/6304815985')
+		self.assertEqual(resp.templates[0].name, "display.html")
+		self.assertEqual(resp.context['photoUrl'], "http://farm7.static.flickr.com/6099/6304815985_ca9ffc2873_b.jpg")
+
+	@skipIf(SKIP_HTTPREQUEST_TESTS, "Skipping method because it hits an external resource, use sparingly")
+	def test_ClientUrl_MagicPhotoId_TemplateInvoked(self):
+		c = Client()
+		resp = c.get('/magic/6304815985')
+		self.assertEqual(resp.templates[0].name, "display.html")
+		self.assertEqual(resp.context['hexColor'], "#5081cd")
+
+	@skipIf(SKIP_HTTPREQUEST_TESTS, "Skipping method because it hits an external resource, use sparingly")
+	def test_ClientUrl_ColorUrlReferrer_TemplateInvoked(self):
+		c = Client()
+		resp = c.get('/red', {}, HTTP_REFERER='http://flickr.com/photos/mendhak/6304815985/in/photostream')
+		self.assertEqual(resp.templates[0].name, "display.html")
+		self.assertEqual(resp.context['hexColor'], "#ff0000")
+
+
