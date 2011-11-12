@@ -11,14 +11,7 @@ from bg import flickrapi
 
 
 def showcolor(request, color, photoid):
-	# Get photo id
-	# Get largest photo size URL
-	# Get color(color, photoUrl)
-	#   If magic, then download, average RGB
-	#   If hex, get hex
-	#   Else get color by name
-	#
-	resp = HttpResponse()
+
 	flickrPhotoId = getPhotoId(photoid, request)
 
 	if not flickrPhotoId:
@@ -47,6 +40,31 @@ def main(request):
 	resp.write("This is the main page")
 	return resp
 
+
+def getPhotoId(photoId, request):
+	if photoId:
+		return photoId
+
+	if request:
+		referrer = getReferrerFromRequest(request)
+		photoId = flickrapi.getPhotoIdFromUrl(referrer)
+		return photoId
+
+
+def getColor(colorString, photoUrl):
+
+	if not colorString:
+		return "#000000"
+
+	if colorString.lower() == "magic":
+		rgbArray = getRemoteImageRgb(photoUrl)
+		averageRgb = getAverageRgb(rgbArray)
+		return getHexadecimalFromRgb(averageRgb)
+
+	if isHexString(colorString):
+		return "#" + colorString.lower()
+
+	return getColorByName(colorString)
 
 
 
@@ -99,31 +117,6 @@ def getReferrerFromRequest(req):
 
 	return None
 
-
-def getPhotoId(photoId, request):
-	if photoId:
-		return photoId
-
-	if request:
-		referrer = getReferrerFromRequest(request)
-		photoId = flickrapi.getPhotoIdFromUrl(referrer)
-		return photoId
-
-
-def getColor(colorString, photoUrl):
-
-	if not colorString:
-		return "#000000"
-
-	if colorString.lower() == "magic":
-		rgbArray = getRemoteImageRgb(photoUrl)
-		averageRgb = getAverageRgb(rgbArray)
-		return getHexadecimalFromRgb(averageRgb)
-
-	if isHexString(colorString):
-		return "#" + colorString.lower()
-	
-	return getColorByName(colorString)
 
 def getRemoteImageRgb(photoUrl):
 	remoteimg = urllib.urlopen(photoUrl)
