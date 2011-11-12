@@ -31,11 +31,11 @@ Suited to landscape photos:  http://flkr.me/full/6245582355
 
 Post any of the above type of URL on a public Flickr photo page:
 
-* http://flkr.me/black
+* flkr.me/black
 
-* http://flkr.me/magic
+* flkr.me/magic
 
-* http://flkr.me/141414
+* flkr.me/141414
 
 
 
