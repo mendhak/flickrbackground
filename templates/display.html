@@ -9,7 +9,9 @@
 		   margin: 0;
 		   padding: 0;
 		   border: 0;
+		    overflow: hidden;
 		}
+
 		#wrapper td {
 		   vertical-align: middle;
 		   text-align: center;
@@ -21,7 +23,7 @@
 
    <table id="wrapper">
       <tr>
-         <td><a title="Return to the Flickr photo page" href="{{ returnUrl }}"><img title="Return to the Flickr photo page" src="{{ photoUrl }}" style="border-width:0px;" width="" /></a></td>
+         <td><a title="Return to the Flickr photo page" href="{{ returnUrl }}"><img title="Return to the Flickr photo page" src="{{ photoUrl }}" style="border-width:0px;" width="{{ width }}" /></a></td>
       </tr>
    </table>
 

@@ -33,7 +33,13 @@ def showcolor(request, color, photoid):
 
 	returnUrl = "http://www.flickr.com/photo.gne?id=" + flickrPhotoId
 
-	return render_to_response('display.html', {'hexColor': hexColor, 'photoUrl': photoUrl, 'returnUrl': returnUrl})
+	width = ""
+
+	if color.lower() == "full":
+		width = "100%"
+
+	return render_to_response('display.html', {'hexColor': hexColor, 'photoUrl': photoUrl, 'returnUrl': returnUrl,
+	                                           'width': width})
 
 
 def main(request):
