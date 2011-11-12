@@ -7,7 +7,14 @@ import webcolors
 from bg import flickrapi
 
 
-def showcolor(request, color, photoid, size):
+def showcolor(request, color, photoid):
+	# Get photo id
+	# Request photo info
+	# Get color(color, photoid)
+	#   If magic, then download, average RGB
+	#   If hex, get hex
+	#   Else get color by name
+	#
 	resp = HttpResponse()
 	return resp
 
