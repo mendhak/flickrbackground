@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html> 
+ 
+	<head> 
+		<meta name="description" content="Create a dynamic flickr signature for forums, emails and web pages - the photos update themselves!" /> 
+		<meta name="keywords" content="flickr, signature, dynamic, url, latest, photos, images" />
+
+		<title>Flickr Background and Full Screen Viewer</title>
+	
+		<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}flickbg.css" />
+
+		<script type="text/javascript">
+			var domain = '{{ domain }}';
+		</script>
+
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+		<script type="text/javascript" src="{{ STATIC_URL }}flickbg.js"></script>
+		<script type="text/javascript" src="{{ STATIC_URL }}jscolor.js"></script>
+
+
+	</head> 
+	 
+	<body> 
+
+		<div id="wrap"> 
+		 
+			 <div> 
+		   		<h1><span style="color: #0063DC;">Flick</span><span style="color: #FF0084">r</span> Background Generator</h1>
+				<p>Use this page to create a link and view your Flickr photo on any colored background, or go for the 'magic' option.  You can also view a photo in full width.</p>
+
+				<p>My photo page is
+					<input type="text" id="photopage" value="http://www.flickr.com/photos/mendhak/5113172451/" />
+				</p>
+					The background should be
+
+				 <fieldset class="radios">
+					<label class="label_radio" for="radio-01"><input name="bgtype" id="radio-01" value="1" type="radio" checked="checked" />Magic! <span class="tiny">(Automatically decide on a suitable background)</span></label>
+					<label class="label_radio" for="radio-02"><input name="bgtype" id="radio-02" value="2" type="radio" />Fullscreen <span class="tiny">(For landscape photos, go full width)</span></label>
+					<label class="label_radio" for="radio-03"><input name="bgtype" id="radio-03" value="3" type="radio" />This color: <input class="ignore color {pickerFaceColor:'transparent',pickerFace:3,pickerBorder:0,pickerInsetColor:'black'}" onchange="document.getElementsByTagName('BODY')[0].style.backgroundColor = '#'+this.color" value="#BDBDBD" /></label>
+				</fieldset>
+
+
+				</p>
+				<div id="generateDiv">
+					<a class="generate" id="generate">Generate</a>	
+					<img id="loading" src="{{ STATIC_URL }}progress.gif" />
+				</div>
+				<br />
+
+			 </div> 
+		 
+		</div> 
+		
+
+
+<a class="sourcelink" href="https://github.com/mendhak/flickrbackground">Source code</a>
+
+	</body> 
+</html> 
+

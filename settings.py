@@ -1,7 +1,10 @@
 # Django settings for flickrbackground project.
+import os
 
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
+
+PROJECT_DIR = os.path.dirname(__file__)
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
@@ -56,6 +59,8 @@ MEDIA_URL = ''
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
+# Leave this blank, Django will use STATICFILES_DIRS
+#     and needs STATIC_ROOT != STATICFILES_DIRS
 STATIC_ROOT = ''
 
 # URL prefix for static files.
@@ -68,7 +73,9 @@ STATIC_URL = '/static/'
 ADMIN_MEDIA_PREFIX = '/static/admin/'
 
 # Additional locations of static files
-STATICFILES_DIRS = (
+# This will only work when DEBUG=True.
+# On production, have your static directory point straight here
+STATICFILES_DIRS = ( os.path.join(PROJECT_DIR, 'static'),
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.

@@ -259,4 +259,7 @@ class SimpleTest(TestCase):
 		self.assertEqual(resp.templates[0].name, "display.html")
 		self.assertEqual(resp.context['hexColor'], "#ff0000")
 
-
+	def test_ClientUrl_Bg_MainTemplateInvoked(self):
+		c = Client()
+		resp = c.get("/backgrounds")
+		self.assertEqual(resp.templates[0].name, "bg.html")

@@ -10,6 +10,7 @@ import urllib
 from xml.dom import minidom
 from django.http import HttpResponse, Http404
 from django.shortcuts import render_to_response
+from django.template.context import RequestContext
 import webcolors
 from bg import flickrapi
 
@@ -41,8 +42,7 @@ def showcolor(request, color, photoid):
 
 def main(request):
 	resp = HttpResponse()
-	resp.write("This is the main page")
-	return resp
+	return render_to_response('bg.html', {}, context_instance=RequestContext(request))
 
 
 def getPhotoId(photoId, request):
