@@ -42,7 +42,7 @@ def showcolor(request, color, photoid):
 
 def main(request):
 	resp = HttpResponse()
-	return render_to_response('bg.html', {}, context_instance=RequestContext(request))
+	return render_to_response('bg.html', {'domain': request.get_host()}, context_instance=RequestContext(request))
 
 
 def getPhotoId(photoId, request):

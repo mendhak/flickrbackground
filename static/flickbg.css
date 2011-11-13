@@ -46,6 +46,40 @@ textarea {
 	width: 450px;
 }
 
+.generate {
+	-moz-box-shadow: inset 0px 1px 0px 0px #bbdaf7;
+	-webkit-box-shadow: inset 0px 1px 0px 0px #bbdaf7;
+	box-shadow: inset 0px 1px 0px 0px #bbdaf7;
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #79bbff), color-stop(1, #378de5));
+	background: -moz-linear-gradient(center top, #79bbff 5%, #378de5 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#79bbff', endColorstr = '#378de5');
+	background-color: #79bbff;
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	border-radius: 6px;
+	border: 1px solid #84bbf3;
+	display: inline-block;
+	color: #ffffff;
+	font-family: arial;
+	font-size: 15px;
+	font-weight: bold;
+	padding: 6px 37px;
+	text-decoration: none;
+	text-shadow: 1px 1px 0px #528ecc;
+	cursor: pointer;
+}
+
+.generate:hover {
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #378de5), color-stop(1, #79bbff));
+	background: -moz-linear-gradient(center top, #378de5 5%, #79bbff 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#378de5', endColorstr = '#79bbff');
+	background-color: #378de5;
+}
+
+.generate:active {
+	position: relative;
+	top: 1px;
+}
 
 #generateDiv {
 	margin: 0 auto;
@@ -103,6 +137,7 @@ img {
 fieldset {
 	border: 0;
 	padding-bottom: 9px;
+	width:350px;
 }
 
 label {
@@ -118,16 +153,24 @@ label {
 	margin-right: 5px;
 }
 
-.generatedurl{
-	text-align:center;
+.cpc {
+	width:0px;
+	height:50px;
+	display:inline;
+	float:left;
+}
+
+.generatedurl {
+	text-align: center;
 	margin: 0 auto;
 }
 
-.widebig{
-	width:250px;
-	height:35px;
+.widebig {
+	width: 280px;
+	height: 35px;
 	font-size: 14px;
 	font-weight: bold;
 	margin: 0 auto;
-	text-align:center;
+	text-align: center;
 }
+

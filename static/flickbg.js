@@ -43,7 +43,7 @@ function generateBgUrl(){
 	var m = photourl.match(/photos\/[^\/]+\/([0-9]+)/i);
 
 
-	$("#finalurl").val("http://flkr.me/" + urlPrefix + "/" + m[1]);
+	$("#finalurl").val("http://" + domain +"/" + urlPrefix + "/" + m[1]);
 
 }
 
@@ -61,13 +61,20 @@ function colorPickerChanged(){
 
 $(document).ready(function() {
 
+	//Events in which to generate the new URL
 	$("#photopage").bind("change", generateBgUrl);
 	$("#photopage").keyup(function(event) {generateBgUrl();});
-	$("#colorpicker").bind("change", colorPickerChanged);
-	$("#previewlink").click(function() { showPreview(); })
 	$("input[name='bgtype']").change(function(){ generateBgUrl(); })
 
-	$('textarea, input').live('focus mouseup', function(e) {
+	//Generate the new URL AND set the page's background color
+	$("#colorpicker").bind("change", colorPickerChanged);
+
+	//Handles the preview link click
+	$("#preview").click(function() { showPreview(); })
+
+
+	//Selects all the text in a textbox
+	$('#photopage, #finalurl, #colorpicker').live('focus mouseup', function(e) {
 					if (e.type == 'focusin') {
 					this.select();
 					}
@@ -77,6 +84,8 @@ $(document).ready(function() {
 		}
 		});
 
+	//Click in the color picker, selects the third radio button
+	$('#colorpicker').click(function(){ $('#radio-03').click(); setupLabel(); })
 
 	$('body').addClass('has-js');
 	$('.label_check, .label_radio').click(function() {
