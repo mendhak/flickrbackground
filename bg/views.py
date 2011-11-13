@@ -31,13 +31,13 @@ def showcolor(request, color, photoid):
 
 	returnUrl = "http://www.flickr.com/photo.gne?id=" + flickrPhotoId
 
-	width = ""
+	fullWidth = False
 
 	if color.lower() == "full":
-		width = "100%"
+		fullWidth = True
 
 	return render_to_response('display.html', {'hexColor': hexColor, 'photoUrl': photoUrl, 'returnUrl': returnUrl,
-	                                           'width': width})
+	                                           'fullWidth': fullWidth})
 
 
 def main(request):

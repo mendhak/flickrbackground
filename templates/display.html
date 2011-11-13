@@ -28,7 +28,8 @@
 
    <table id="wrapper" cellpadding="0" cellspacing="0">
       <tr>
-         <td><a href="{{ returnUrl }}"><img src="{{ photoUrl }}" style="border-width:0px;" width="{{ width }}" /></a></td>
+         <td><a href="{{ returnUrl }}"><img src="{{ photoUrl }}" style="border-width:0px;"
+		         {% if fullWidth %}  width="100%" {% else %} {% endif %} /></a></td>
       </tr>
    </table>
 
