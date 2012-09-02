@@ -4,7 +4,61 @@
 
 	<meta name="robots" content="noindex, follow" />
 	<link href="data:image/x-icon;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQEAYAAABPYyMiAAAABmJLR0T///////8JWPfcAAAACXBIWXMAAABIAAAASABGyWs+AAAAF0lEQVRIx2NgGAWjYBSMglEwCkbBSAcACBAAAeaR9cIAAAAASUVORK5CYII=" rel="icon" type="image/x-icon" />
-	
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+	<script type="text/javascript" src="{{ STATIC_URL }}screenfull.js"></script>
+	<script type="text/javascript" src="{{ STATIC_URL }}notifier.js"></script>
+
+	<script type="text/javascript">
+
+
+
+		function redirectToPhotoPage()
+		{
+			screenfull.exit();
+			document.location.href='http://www.flickr.com/photo.gne?id=7911819418';
+		}
+
+
+		function toggleFullScreen()
+		{
+			screenfull.toggle( $('#target')[0] );
+		}
+
+		function showToaster()
+		{
+			window.NotifierjsConfig.defaultTimeOut = 2000;
+			Notifier.info('Click again to go back to Flickr','Click to view fullscreen');
+		}
+
+		$(function() {
+
+			if(!screenfull) {
+				return;
+			}
+
+			showToaster();
+			$('#imglink').removeAttr('href');
+			$('#target').on('click', toggleFullScreen);
+
+			screenfull.onchange = function() {
+
+									if(screenfull.isFullscreen)
+									{
+										$('#target').css('cursor','none');
+										$('#target').off('click');
+										$('#target').on('click', redirectToPhotoPage);
+									}
+									else
+									{
+										$('#target').css('cursor','pointer');
+									}
+								};
+		});
+
+
+		</script>
+
+
     <style type="text/css">
 
 	    html, body, #wrapper {
@@ -22,13 +76,17 @@
 		   text-align: center;
 		}
 
+	    #target {
+		    cursor:pointer;
+	    }
+
     </style>
 </head>
 <body style="background-color:{{ hexColor }};">
 
    <table id="wrapper" cellpadding="0" cellspacing="0">
       <tr>
-         <td><a href="{{ returnUrl }}"><img src="{{ photoUrl }}" style="border-width:0px;"
+         <td><a id="imglink" href="{{ returnUrl }}"><img id="target" src="{{ photoUrl }}" style="border-width:0px;"
 		         {% if fullWidth %}  width="100%" {% else %} {% endif %} /></a></td>
       </tr>
    </table>

@@ -37,7 +37,7 @@ def showcolor(request, color, photoid):
 		fullWidth = True
 
 	return render_to_response('display.html', {'hexColor': hexColor, 'photoUrl': photoUrl, 'returnUrl': returnUrl,
-	                                           'fullWidth': fullWidth})
+	                                           'fullWidth': fullWidth}, context_instance=RequestContext(request))
 
 
 def main(request):
