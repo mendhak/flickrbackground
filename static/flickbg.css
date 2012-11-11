@@ -1,6 +1,6 @@
 body {
-	font-family: Verdana, Tahoma;
-	font-size: 14px;
+	font-family: Arial, Tahoma;
+	font-size: 12px;
 	line-height: 20px;
 	color: #333;
 	background: #93BDBA;
@@ -20,30 +20,21 @@ body {
 	box-shadow: 3px 3px 5px #666;
 }
 
-#preview {
-	margin: 0 auto;
-	text-align: center;
-
-}
 
 h1 {
 	font-size: 42px;
-	font-family: Verdana, Tahoma;
+	font-family: Arial, Tahoma;
 	text-shadow: 2px 2px 4px #bbb;
 	text-align: center;
 }
 
-textarea {
-	width: 100%;
-	height: 100px;
-}
-
-#latest {
-	width: 25px;
+p.userinput{
+    margin-left: 35px;
+    font-size: 14px;
 }
 
 #photopage {
-	width: 450px;
+	width: 480px;
 }
 
 .generate {
@@ -87,7 +78,8 @@ textarea {
 }
 
 p.tiny, .tiny {
-	font-size: 10px;
+    display:inline;
+	font-size: 18px;
 }
 
 .sourcelink {
@@ -115,24 +107,7 @@ img {
 	padding-left: 34px;
 }
 
-.has-js .label_radio {
-	background: url(radio-off.png) no-repeat;
-}
 
-.has-js label.r_on {
-	background: url(radio-on.png) no-repeat;
-}
-
-.has-js .label_check input,
-.has-js .label_radio input {
-	position: absolute;
-	left: -9999px;
-}
-
-.has-js .label_radio input.ignore {
-	position: relative;
-	left: inherit;
-}
 
 fieldset {
 	border: 0;
@@ -148,17 +123,7 @@ label {
 	text-shadow: 0 -1px 0 rgba(0, 0, 0, .2);
 }
 
-.label_check input,
-.label_radio input {
-	margin-right: 5px;
-}
 
-.cpc {
-	width:0px;
-	height:50px;
-	display:inline;
-	float:left;
-}
 
 .generatedurl {
 	text-align: center;
@@ -166,11 +131,12 @@ label {
 }
 
 .widebig {
-	width: 280px;
-	height: 35px;
-	font-size: 14px;
+	width: 300px;
+	height: 45px;
+	font-size: 16px;
 	font-weight: bold;
 	margin: 0 auto;
 	text-align: center;
 }
+
 

@@ -2,10 +2,10 @@
 <html> 
  
 	<head> 
-		<meta name="description" content="Create a dynamic flickr signature for forums, emails and web pages - the photos update themselves!" /> 
-		<meta name="keywords" content="flickr, signature, dynamic, url, latest, photos, images" />
+		<meta name="description" content="View your Flickr photos in full screen and share with your contacts" />
+		<meta name="keywords" content="flickr,full, screen, image, width, wide, expanded" />
 
-		<title>Flickr Background and Full Screen Viewer</title>
+		<title>Flickr Full Screen Viewer</title>
 	
 		<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}flickbg.css" />
 
@@ -25,26 +25,18 @@
 		<div id="wrap"> 
 		 
 			 <div> 
-		   		<h1><span style="color: #0063DC;">Flick</span><span style="color: #FF0084">r</span> Background Generator</h1>
-				<p>Use this page to create a link and view your Flickr photo on any colored background, or go for the 'magic' option.  You can also view a photo in full width.</p>
+		   		<h1><span style="color: #0063DC;">Flick</span><span style="color: #FF0084">r</span> Full Screen Viewer</h1>
+				<p class="userinput">Paste a link to your photo on Flickr. The generated link below will show your photos in glorious full screen.</p>
 
-				<p>My photo page is
+				<p class="userinput">My photo page is
 					<input type="text" id="photopage" value="http://www.flickr.com/photos/mendhak/5113172451/" />
 				</p>
-					The background should be
 
-				 <fieldset class="radios">
-					<label class="label_radio" for="radio-01"><input name="bgtype" id="radio-01" value="1" type="radio" checked="checked" />Magic! <span class="tiny">(Automatically decide on a suitable background)</span></label>
-					<label class="label_radio" for="radio-02"><input name="bgtype" id="radio-02" value="2" type="radio" />Fullscreen <span class="tiny">(For landscape photos, go full width. <a href="http://{{ domain }}/full/5113172451" onclick="window.open(this.href);return false;">Example</a>)</span></label>
-					<label class="label_radio cpc" for="radio-03"><input name="bgtype" id="radio-03" value="3" type="radio" /></label><input id="colorpicker" class="ignore color {pickerFaceColor:'transparent',pickerFace:3,pickerBorder:0,pickerInsetColor:'black'}"  value="#93BDBA" />
-				</fieldset>
-
-				
 
 				 <div class="generatedurl">
 					 <br />
-					 <span class="tiny" >Put this on your Flickr photo page:</span>
-					 <input type="text" readonly="readonly" id="finalurl" value="http://{{ domain }}/magic/5113172451" class="widebig" />
+					 <label for="finalurl" class="tiny" >Share this with your friends:</label>
+					 <input type="text" readonly="readonly" id="finalurl" value="http://{{ domain }}/full/5113172451" class="widebig" />
 					 <span id="generateDiv">
 						<a class="generate" id="preview">Preview</a>
 						<img id="loading" src="{{ STATIC_URL }}progress.gif" />

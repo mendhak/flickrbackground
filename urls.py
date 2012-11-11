@@ -7,6 +7,7 @@ from django.conf import settings
 
 urlpatterns = patterns('',
                        url(r'^backgrounds$', 'bg.views.main'),
+                       url(r'^fullscreen$', 'bg.views.main'),
                        url(r'^(?i)(?P<color>[^/]+)/?(?P<photoid>[0-9]+)?', 'bg.views.showcolor'),
     # Examples:
     # url(r'^$', 'flickrbackground.views.home', name='home'),
