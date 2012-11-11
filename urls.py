@@ -1,12 +1,13 @@
 from django.conf.urls.defaults import patterns, include, url
 from django.conf import settings
+from django.views.generic.simple import redirect_to
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
 # admin.autodiscover()
 
 urlpatterns = patterns('',
-                       url(r'^backgrounds$', 'bg.views.main'),
+                       (r'^backgrounds$', redirect_to, {'url': '/fullscreen'}),
                        url(r'^fullscreen$', 'bg.views.main'),
                        url(r'^(?i)(?P<color>[^/]+)/?(?P<photoid>[0-9]+)?', 'bg.views.showcolor'),
     # Examples:
