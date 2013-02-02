@@ -21,7 +21,7 @@
 
 		function toggleFullScreen()
 		{
-			screenfull.toggle( $('#target')[0] );
+			screenfull.toggle( $('#wrapper')[0] );
 		}
 
 		function showToaster()
@@ -38,7 +38,7 @@
 
 			showToaster();
 			$('#imglink').removeAttr('href');
-			$('#target').on('click', toggleFullScreen);
+			$('#wrapper').on('click', toggleFullScreen);
 
 			screenfull.onchange = function() {
 
